@@ -1,0 +1,328 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Model Comparison{% endblock %}
+
+{% block content %}
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-11">
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="section-badge mb-3">
+              <i class="bi bi-bar-chart-fill"></i> Model Comparison
+            </span>
+            <h1 class="fw-bold mb-2" style="font-size: 2.3rem;">Agriculture Model Performance Comparison</h1>
+            <p class="text-muted mb-0" style="max-width: 760px; line-height: 1.8;">
+              Compare the three trained AgriVision models using accuracy, precision, recall, F1-score,
+              and training time to identify the best performing module.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="feature-card p-4 h-100">
+              <div class="small text-muted mb-2">Best Performing Model</div>
+              <h3 class="fw-bold text-success mb-1">{{ best_model.name }}</h3>
+              <div class="mb-2">{{ best_model.module }}</div>
+              <div class="fw-semibold">Accuracy: {{ best_model.accuracy }}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+              <i class="bi bi-cpu-fill fs-4 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-1">{{ models|length }}</h5>
+            <p class="text-muted mb-0">Total Models Compared</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+              <i class="bi bi-trophy-fill fs-4 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-1">{{ best_model.accuracy }}%</h5>
+            <p class="text-muted mb-0">Highest Accuracy</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+              <i class="bi bi-graph-up-arrow fs-4 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-1">{{ best_model.f1_score }}%</h5>
+            <p class="text-muted mb-0">Best F1 Score</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+              <i class="bi bi-award-fill fs-4 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-1">{{ best_model.module }}</h5>
+            <p class="text-muted mb-0">Recommended Module</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Detailed Comparison Table</h3>
+            <p class="text-muted mb-0">Performance comparison of the three trained agriculture models.</p>
+          </div>
+          <span class="mini-badge">
+            <i class="bi bi-check2-square"></i> Evaluation Metrics
+          </span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Module</th>
+                <th>Pipeline</th>
+                <th>Accuracy</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1-Score</th>
+                <th>Training Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for model in models %}
+              <tr>
+                <td class="fw-semibold">{{ model.name }}</td>
+                <td>{{ model.module }}</td>
+                <td>{{ model.algorithm }}</td>
+                <td>{{ model.accuracy }}%</td>
+                <td>{{ model.precision }}%</td>
+                <td>{{ model.recall }}%</td>
+                <td>{{ model.f1_score }}%</td>
+                <td>{{ model.training_time }} sec</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-lg-7">
+          <div class="glass-card p-4 h-100">
+            <h4 class="fw-bold mb-3">Accuracy Comparison</h4>
+            <canvas id="accuracyChart" height="220"></canvas>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="glass-card p-4 h-100">
+            <h4 class="fw-bold mb-3">Accuracy Distribution</h4>
+            <canvas id="shareChart" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <h4 class="fw-bold mb-3">Precision / Recall / F1-Score</h4>
+        <canvas id="metricChart" height="120"></canvas>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <h4 class="fw-bold mb-3">Training Time Analysis</h4>
+        <canvas id="timeChart" height="110"></canvas>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5">
+        <h3 class="fw-bold mb-4">Configured Training Pipelines</h3>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+                <i class="bi bi-flower1 fs-4 text-success"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Weed Detection</h5>
+              <p class="text-muted mb-0" style="line-height: 1.8;">
+                Uses a CNN-based weed detection pipeline for image-based weed recognition and classification.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+                <i class="bi bi-heart-pulse-fill fs-4 text-success"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Crop Health Detection</h5>
+              <p class="text-muted mb-0" style="line-height: 1.8;">
+                Uses an ANN-based crop health classification pipeline to identify healthy and affected crops.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="rounded-4 p-3 bg-light d-inline-flex mb-3">
+                <i class="bi bi-stars fs-4 text-success"></i>
+              </div>
+              <h5 class="fw-bold mb-2">Crop Quality Assessment</h5>
+              <p class="text-muted mb-0" style="line-height: 1.8;">
+                Uses a CNN-based crop quality prediction pipeline for produce quality evaluation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{{ models|json_script:"models-data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const models = JSON.parse(document.getElementById("models-data").textContent);
+
+  const modelNames = models.map(model => model.module);
+  const accuracyData = models.map(model => model.accuracy);
+  const precisionData = models.map(model => model.precision);
+  const recallData = models.map(model => model.recall);
+  const f1Data = models.map(model => model.f1_score);
+  const trainingTimeData = models.map(model => model.training_time);
+
+  const commonColors = [
+    'rgba(25, 135, 84, 0.85)',
+    'rgba(13, 110, 253, 0.85)',
+    'rgba(255, 193, 7, 0.90)'
+  ];
+
+  new Chart(document.getElementById('accuracyChart'), {
+    type: 'bar',
+    data: {
+      labels: modelNames,
+      datasets: [{
+        label: 'Accuracy (%)',
+        data: accuracyData,
+        backgroundColor: commonColors,
+        borderRadius: 12,
+        barThickness: 52
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('shareChart'), {
+    type: 'pie',
+    data: {
+      labels: modelNames,
+      datasets: [{
+        data: accuracyData,
+        backgroundColor: commonColors,
+        borderWidth: 2,
+        hoverOffset: 10
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('metricChart'), {
+    type: 'bar',
+    data: {
+      labels: modelNames,
+      datasets: [
+        {
+          label: 'Precision',
+          data: precisionData,
+          backgroundColor: 'rgba(13, 110, 253, 0.78)',
+          borderRadius: 8
+        },
+        {
+          label: 'Recall',
+          data: recallData,
+          backgroundColor: 'rgba(220, 53, 69, 0.78)',
+          borderRadius: 8
+        },
+        {
+          label: 'F1-Score',
+          data: f1Data,
+          backgroundColor: 'rgba(255, 193, 7, 0.85)',
+          borderRadius: 8
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('timeChart'), {
+    type: 'line',
+    data: {
+      labels: modelNames,
+      datasets: [{
+        label: 'Training Time (sec)',
+        data: trainingTimeData,
+        borderColor: 'rgba(25, 135, 84, 0.95)',
+        backgroundColor: 'rgba(25, 135, 84, 0.12)',
+        fill: true,
+        tension: 0.35,
+        pointRadius: 5,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

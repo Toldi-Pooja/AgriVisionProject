@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | User Dashboard{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+  <div class="glass-card p-4 p-lg-5">
+    <span class="section-badge mb-3"><i class="bi bi-person-badge-fill"></i> User Dashboard</span>
+    <h1 class="fw-bold mb-2" style="font-size:2.5rem;">Welcome, {{ request.user.username }}</h1>
+    <p class="text-muted mb-0">Choose a module to upload images, get predictions and view recommendations.</p>
+  </div>
+</section>
+
+<section>
+  <div class="row g-4">
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-bug-fill"></i></div>
+        <h4 class="fw-bold">Weed Detection</h4>
+        <p class="mb-3">Upload weed or field image for prediction.</p>
+        <a href="/user/weed/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-activity"></i></div>
+        <h4 class="fw-bold">Crop Disease</h4>
+        <p class="mb-3">Detect healthy or diseased crops.</p>
+        <a href="/user/disease/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-gem"></i></div>
+        <h4 class="fw-bold">Crop Quality</h4>
+        <p class="mb-3">Assess crop quality with suggestions.</p>
+        <a href="/user/quality/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-person-circle"></i></div>
+        <h4 class="fw-bold">View Profile</h4>
+        <p class="mb-3">See your user account details.</p>
+        <a href="/user/profile/" class="btn btn-soft">Open</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-11">
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="section-badge mb-3">
+              <i class="bi bi-speedometer2"></i> Admin Dashboard
+            </span>
+            <h1 class="fw-bold mb-3" style="font-size: 2.35rem;">Dataset & Model Management</h1>
+            <p class="text-muted mb-0" style="max-width: 760px; line-height: 1.8;">
+              Manage dataset inspection, preprocessing, model training, and performance comparison
+              through a single administrative workspace.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap justify-content-lg-end gap-3">
+              <a href="{% url 'view_dataset' %}" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-folder2-open me-2"></i> Dataset View
+              </a>
+              <a href="{% url 'preprocess_page' %}" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-funnel-fill me-2"></i> Preprocess
+              </a>
+              <a href="{% url 'train_models' %}" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-cpu-fill me-2"></i> Training
+              </a>
+              <a href="{% url 'compare_models' %}" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-bar-chart-fill me-2"></i> Compare
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="rounded-4 p-3 bg-light d-inline-flex">
+                <i class="bi bi-bug-fill fs-4 text-success"></i>
+              </div>
+              <span class="mini-badge">Weed</span>
+            </div>
+            <div class="text-muted mb-2">Weed Dataset Images</div>
+            <h2 class="fw-bold mb-3">{{ weed_total }}</h2>
+            <div class="small text-muted">Train: {{ weed_train }} | Test: {{ weed_test }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="rounded-4 p-3 bg-light d-inline-flex">
+                <i class="bi bi-heart-pulse-fill fs-4 text-success"></i>
+              </div>
+              <span class="mini-badge">Health</span>
+            </div>
+            <div class="text-muted mb-2">Crop Health Images</div>
+            <h2 class="fw-bold mb-3">{{ disease_total }}</h2>
+            <div class="small text-muted">Training: {{ disease_train }} | Test: {{ disease_test }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="rounded-4 p-3 bg-light d-inline-flex">
+                <i class="bi bi-gem fs-4 text-success"></i>
+              </div>
+              <span class="mini-badge">Quality</span>
+            </div>
+            <div class="text-muted mb-2">Quality Assets</div>
+            <h2 class="fw-bold mb-3">{{ quality_total }}</h2>
+            <div class="small text-muted">Train: {{ quality_train }} | Test: {{ quality_test }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+          <div class="feature-card p-4 h-100">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="rounded-4 p-3 bg-light d-inline-flex">
+                <i class="bi bi-diagram-3-fill fs-4 text-success"></i>
+              </div>
+              <span class="mini-badge">Classes</span>
+            </div>
+            <div class="text-muted mb-2">Total Dataset Classes</div>
+            <h2 class="fw-bold mb-3">{{ total_classes }}</h2>
+            <div class="small text-muted">Across weed, health, and quality datasets</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5">
+        <h2 class="fw-bold mb-3">Administrative Actions</h2>
+        <p class="text-muted mb-4">
+          Choose an operation to continue managing the agriculture pipeline.
+        </p>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-3">
+            <a href="{% url 'view_dataset' %}" class="text-decoration-none">
+              <div class="feature-card p-4 h-100">
+                <i class="bi bi-images fs-2 text-success mb-3 d-block"></i>
+                <h5 class="fw-bold text-dark">View Dataset</h5>
+                <p class="text-muted mb-0">Inspect class-wise images, train counts, and test counts.</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <a href="{% url 'preprocess_page' %}" class="text-decoration-none">
+              <div class="feature-card p-4 h-100">
+                <i class="bi bi-sliders fs-2 text-success mb-3 d-block"></i>
+                <h5 class="fw-bold text-dark">Preprocess Data</h5>
+                <p class="text-muted mb-0">Run preprocessing for weed, crop health, and crop quality modules.</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <a href="{% url 'train_models' %}" class="text-decoration-none">
+              <div class="feature-card p-4 h-100">
+                <i class="bi bi-cpu fs-2 text-success mb-3 d-block"></i>
+                <h5 class="fw-bold text-dark">Train Models</h5>
+                <p class="text-muted mb-0">Launch the configured model training workflow for each module.</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <a href="{% url 'compare_models' %}" class="text-decoration-none">
+              <div class="feature-card p-4 h-100">
+                <i class="bi bi-bar-chart-line fs-2 text-success mb-3 d-block"></i>
+                <h5 class="fw-bold text-dark">Compare Models</h5>
+                <p class="text-muted mb-0">Analyze performance metrics and compare trained agriculture models.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

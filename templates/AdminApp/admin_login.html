@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Admin Login{% endblock %}
+
+{% block content %}
+<section class="py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-xl-4">
+      <div class="glass-card p-4 p-lg-5">
+        <div class="text-center mb-4">
+          <span class="section-badge mb-3">
+            <i class="bi bi-shield-lock-fill"></i> Admin Access
+          </span>
+          <h1 class="fw-bold mb-2">Admin Login</h1>
+          <p class="text-muted mb-0">
+            Login to manage dataset viewing, preprocessing, model training, and comparison.
+          </p>
+        </div>
+
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Enter admin username" required>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Enter admin password" required>
+          </div>
+
+          <button type="submit" class="btn btn-theme w-100 justify-content-center">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

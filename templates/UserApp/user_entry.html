@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}AgriVision | User Access{% endblock %}
+
+{% block content %}
+
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="glass-card p-4 p-lg-5">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <span class="section-badge mb-3">
+              <i class="bi bi-person-circle"></i> User Portal
+            </span>
+            <h1 class="fw-bold mb-3" style="font-size:3rem; line-height:1.1;">
+              Access prediction tools with a clean and simple workflow
+            </h1>
+            <p class="text-muted mb-4" style="font-size:1.05rem; line-height:1.8;">
+              Login or create a new account to upload crop images, detect diseases, assess crop quality, identify weeds, and view recommendations.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+              <a href="/user/login/" class="btn btn-theme">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+              </a>
+              <a href="/user/register/" class="btn btn-soft">
+                <i class="bi bi-person-plus-fill"></i> Create Account
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="feature-card h-100">
+              <div class="feature-icon"><i class="bi bi-grid-1x2-fill"></i></div>
+              <h4 class="fw-bold">What you can do</h4>
+              <p class="text-muted mb-3">Use the user dashboard to access these smart agriculture modules:</p>
+
+              <div class="d-flex flex-wrap">
+                <span class="section-badge me-2 mb-2"><i class="bi bi-activity"></i> Disease Detection</span>
+                <span class="section-badge me-2 mb-2"><i class="bi bi-gem"></i> Crop Quality</span>
+                <span class="section-badge me-2 mb-2"><i class="bi bi-bug-fill"></i> Weed Detection</span>
+                <span class="section-badge me-2 mb-2"><i class="bi bi-lightbulb-fill"></i> Suggestions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

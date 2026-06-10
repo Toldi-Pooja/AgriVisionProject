@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Train Models{% endblock %}
+
+{% block content %}
+<section class="py-3">
+  <div class="glass-card p-4 p-lg-5">
+    <span class="section-badge mb-3"><i class="bi bi-cpu-fill"></i> Train Models</span>
+    <h2 class="fw-bold mb-2">Model Training Lab</h2>
+    <p class="text-muted mb-4">Run paper-aligned algorithms from a single clean workspace.</p>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-xl-4">
+        <div class="feature-card">
+          <h4 class="fw-bold">SVM</h4>
+          <p class="mb-3">Support Vector Machine baseline training.</p>
+          <button class="btn btn-theme">Run SVM</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <div class="feature-card">
+          <h4 class="fw-bold">Random Forest</h4>
+          <p class="mb-3">Tree-based ensemble model training.</p>
+          <button class="btn btn-theme">Run RF</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <div class="feature-card">
+          <h4 class="fw-bold">ANN</h4>
+          <p class="mb-3">Artificial neural network workflow.</p>
+          <button class="btn btn-theme">Run ANN</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-6">
+        <div class="feature-card">
+          <h4 class="fw-bold">CNN</h4>
+          <p class="mb-3">Deep learning image classification training.</p>
+          <button class="btn btn-theme">Run CNN</button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-6">
+        <div class="feature-card">
+          <h4 class="fw-bold">YOLO</h4>
+          <p class="mb-3">Object detection / weed region detection workflow.</p>
+          <button class="btn btn-theme">Run YOLO</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

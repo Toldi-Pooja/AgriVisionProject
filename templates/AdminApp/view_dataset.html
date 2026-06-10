@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | View Dataset{% endblock %}
+
+{% block content %}
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-11">
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="section-badge mb-3">
+              <i class="bi bi-images"></i> Dataset View
+            </span>
+            <h1 class="fw-bold mb-2" style="font-size: 2.35rem;">Dataset Overview & Samples</h1>
+            <p class="text-muted mb-0" style="max-width: 780px; line-height: 1.8;">
+              Inspect training counts, testing counts, class-wise dataset distribution, and representative
+              sample images for weed detection, crop health detection, and crop quality assessment modules.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap justify-content-lg-end gap-2">
+              <span class="mini-badge"><i class="bi bi-bug-fill"></i> Weed</span>
+              <span class="mini-badge"><i class="bi bi-heart-pulse-fill"></i> Health</span>
+              <span class="mini-badge"><i class="bi bi-gem"></i> Quality</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 col-xl-4">
+          <div class="feature-card p-4 h-100">
+            <h5 class="fw-bold mb-3">Weed Dataset</h5>
+            <p class="text-muted mb-2">Training Images: {{ weed_summary_train }}</p>
+            <p class="text-muted mb-2">Testing Images: {{ weed_summary_test }}</p>
+            <p class="text-muted mb-0">Total Images: {{ weed_summary_total }}</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="feature-card p-4 h-100">
+            <h5 class="fw-bold mb-3">Crop Health Dataset</h5>
+            <p class="text-muted mb-2">Training Images: {{ disease_summary_train }}</p>
+            <p class="text-muted mb-2">Testing Images: {{ disease_summary_test }}</p>
+            <p class="text-muted mb-0">Total Images: {{ disease_summary_total }}</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="feature-card p-4 h-100">
+            <h5 class="fw-bold mb-3">Crop Quality Dataset</h5>
+            <p class="text-muted mb-2">Training Images: {{ quality_summary_train }}</p>
+            <p class="text-muted mb-2">Testing Images: {{ quality_summary_test }}</p>
+            <p class="text-muted mb-0">Total Images: {{ quality_summary_total }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEED -->
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <span class="section-badge mb-3"><i class="bi bi-bug-fill"></i> Weed Dataset</span>
+        <h2 class="fw-bold mb-2">Weed Detection Training Data</h2>
+        <p class="text-muted mb-4">
+          Training and testing images used for weed recognition, crop-with-weed analysis, and weed classification.
+        </p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Training Images</h6>
+              <h2 class="fw-bold mb-0">{{ weed_summary_train }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Testing Images</h6>
+              <h2 class="fw-bold mb-0">{{ weed_summary_test }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Total Images</h6>
+              <h2 class="fw-bold mb-0">{{ weed_summary_total }}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Sample Weed Images</h4>
+            <span class="mini-badge">{{ weed_samples|length }} Samples</span>
+          </div>
+          <p class="text-muted mb-4">
+            Representative weed and crop-with-weed sample images used in the weed detection workflow.
+          </p>
+
+          <div class="row g-3">
+            {% for img in weed_samples %}
+            <div class="col-6 col-md-4 col-xl-2">
+              <div class="feature-card p-2">
+                <img src="{{ img }}" class="img-fluid rounded-4" alt="Weed Sample" style="height: 180px; width: 100%; object-fit: cover;">
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+              <p class="text-muted mb-0">No weed sample images found in static/images/dataset</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Class Name</th>
+                <th>Training Images</th>
+                <th>Testing Images</th>
+                <th>Total Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in weed_data.classes %}
+              <tr>
+                <td class="fw-semibold">{{ item.name }}</td>
+                <td>{{ item.train_count }}</td>
+                <td>{{ item.test_count }}</td>
+                <td>{{ item.total_count }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- HEALTH -->
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <span class="section-badge mb-3"><i class="bi bi-heart-pulse-fill"></i> Crop Health Dataset</span>
+        <h2 class="fw-bold mb-2">Crop Health Training Data</h2>
+        <p class="text-muted mb-4">
+          Dataset used for crop health classification and disease identification across crop leaf conditions.
+        </p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Training Images</h6>
+              <h2 class="fw-bold mb-0">{{ disease_summary_train }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Testing Images</h6>
+              <h2 class="fw-bold mb-0">{{ disease_summary_test }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Total Images</h6>
+              <h2 class="fw-bold mb-0">{{ disease_summary_total }}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Sample Crop Health Images</h4>
+            <span class="mini-badge">{{ health_samples|length }} Samples</span>
+          </div>
+          <p class="text-muted mb-4">
+            Representative healthy and diseased crop leaf images used for crop health prediction.
+          </p>
+
+          <div class="row g-3">
+            {% for img in health_samples %}
+            <div class="col-6 col-md-4 col-xl-2">
+              <div class="feature-card p-2">
+                <img src="{{ img }}" class="img-fluid rounded-4" alt="Health Sample" style="height: 180px; width: 100%; object-fit: cover;">
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Class Name</th>
+                <th>Training Images</th>
+                <th>Testing Images</th>
+                <th>Total Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in disease_data.classes %}
+              <tr>
+                <td class="fw-semibold">{{ item.name }}</td>
+                <td>{{ item.train_count }}</td>
+                <td>{{ item.test_count }}</td>
+                <td>{{ item.total_count }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- QUALITY -->
+      <div class="glass-card p-4 p-lg-5">
+        <span class="section-badge mb-3"><i class="bi bi-gem"></i> Crop Quality Dataset</span>
+        <h2 class="fw-bold mb-2">Crop Quality Training Data</h2>
+        <p class="text-muted mb-4">
+          Dataset used for crop quality grading and produce evaluation across quality classes.
+        </p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Training Images</h6>
+              <h2 class="fw-bold mb-0">{{ quality_summary_train }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Testing Images</h6>
+              <h2 class="fw-bold mb-0">{{ quality_summary_test }}</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card p-4 text-center h-100">
+              <h6 class="text-muted mb-2">Total Images</h6>
+              <h2 class="fw-bold mb-0">{{ quality_summary_total }}</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Sample Crop Quality Images</h4>
+            <span class="mini-badge">{{ quality_samples|length }} Samples</span>
+          </div>
+          <p class="text-muted mb-4">
+            Representative crop quality sample images used for grading and quality assessment workflow.
+          </p>
+
+          <div class="row g-3">
+            {% for img in quality_samples %}
+            <div class="col-6 col-md-4 col-xl-2">
+              <div class="feature-card p-2">
+                <img src="{{ img }}" class="img-fluid rounded-4" alt="Quality Sample" style="height: 180px; width: 100%; object-fit: cover;">
+              </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+              <p class="text-muted mb-0">Add files like quality_good_1.jpg, quality_moderate_1.jpg, quality_poor_1.jpg in static/images/dataset</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Class Name</th>
+                <th>Training Images</th>
+                <th>Testing Images</th>
+                <th>Total Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in quality_data.classes %}
+              <tr>
+                <td class="fw-semibold">{{ item.name }}</td>
+                <td>{{ item.train_count }}</td>
+                <td>{{ item.test_count }}</td>
+                <td>{{ item.total_count }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

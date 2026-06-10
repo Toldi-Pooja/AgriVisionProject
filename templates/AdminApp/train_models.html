@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Train Models{% endblock %}
+
+{% block content %}
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+
+      <!-- HERO -->
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="section-badge mb-3">
+              <i class="bi bi-cpu-fill"></i> Model Training
+            </span>
+            <h1 class="fw-bold mb-2" style="font-size: 2.35rem;">Train Agriculture Models</h1>
+            <p class="text-muted mb-0" style="max-width: 760px; line-height: 1.8;">
+              Manage module-wise training for AgriVision through a structured workflow. Each module is connected
+              to its corresponding model pipeline, dataset allocation, and training configuration for a clean
+              administrative training experience.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap justify-content-lg-end gap-2">
+              <span class="mini-badge"><i class="bi bi-flower1"></i> Weed</span>
+              <span class="mini-badge"><i class="bi bi-heart-pulse-fill"></i> Crop Health</span>
+              <span class="mini-badge"><i class="bi bi-stars"></i> Crop Quality</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAINING WORKFLOW INTRO -->
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-7">
+            <h3 class="fw-bold mb-3">Module-Based Training Workflow</h3>
+            <p class="text-muted mb-3" style="line-height: 1.8;">
+              Select training directly from the module cards below. Each module automatically launches its
+              assigned training pipeline without requiring separate algorithm selection.
+            </p>
+
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="feature-card p-3 h-100">
+                  <div class="fw-semibold mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>Auto Pipeline Mapping</div>
+                  <div class="small text-muted">Each module is already connected to its model workflow.</div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="feature-card p-3 h-100">
+                  <div class="fw-semibold mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>Direct Training Access</div>
+                  <div class="small text-muted">Start training directly from the module card action button.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="feature-card p-4 h-100">
+              <h5 class="fw-bold mb-3">Training Summary</h5>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Total Modules</span>
+                <strong>3</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Training Pipelines</span>
+                <strong>Module-specific</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Model Types</span>
+                <strong>CNN / ANN</strong>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">Workflow Mode</span>
+                <strong>Admin Controlled</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATASET ALLOCATION -->
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Dataset Allocation for Training</h3>
+            <p class="text-muted mb-0">
+              Training and testing image allocation across AgriVision modules.
+            </p>
+          </div>
+          <span class="mini-badge"><i class="bi bi-bar-chart-steps"></i> Dataset Counts</span>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-flower1 fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">Weed</span>
+              </div>
+              <h5 class="fw-bold mb-3">Weed Detection</h5>
+              <div class="mb-2"><strong>Training Images:</strong> 4,750</div>
+              <div class="mb-2"><strong>Testing Images:</strong> 794</div>
+              <div class="mb-2"><strong>Total Images:</strong> 5,544</div>
+              <div class="text-muted small">Allocated for weed class recognition and agricultural field weed analysis.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-heart-pulse-fill fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">Health</span>
+              </div>
+              <h5 class="fw-bold mb-3">Crop Health Detection</h5>
+              <div class="mb-2"><strong>Training Images:</strong> 12,902</div>
+              <div class="mb-2"><strong>Testing Images:</strong> 2,580</div>
+              <div class="mb-2"><strong>Total Images:</strong> 15,482</div>
+              <div class="text-muted small">Allocated for healthy and diseased crop classification workflow.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-stars fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">Quality</span>
+              </div>
+              <h5 class="fw-bold mb-3">Crop Quality Assessment</h5>
+              <div class="mb-2"><strong>Training Images:</strong> 420</div>
+              <div class="mb-2"><strong>Testing Images:</strong> 105</div>
+              <div class="mb-2"><strong>Total Images:</strong> 525</div>
+              <div class="text-muted small">Allocated for crop grading and quality evaluation workflow.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAINING MODULES -->
+      <div class="glass-card p-4 p-lg-5">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Available Training Modules</h3>
+            <p class="text-muted mb-0">Start training directly from the respective module card.</p>
+          </div>
+          <span class="mini-badge"><i class="bi bi-gear-wide-connected"></i> Integrated Training Actions</span>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- WEED -->
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-flower1 fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">YOLO</span>
+              </div>
+
+              <h5 class="fw-bold mb-2">Weed Detection</h5>
+              <p class="text-muted mb-3" style="line-height: 1.8;">
+                Trains the weed identification model for agricultural field images and supports intelligent
+                weed analysis with structured classification workflow.
+              </p>
+
+              <div class="small text-success fw-semibold mb-2">
+                <i class="bi bi-check-circle-fill me-1"></i> YOLO-based weed detection pipeline
+              </div>
+              <div class="small text-muted mb-3">
+                Dataset Split: 4,750 train / 794 test
+              </div>
+
+              <div class="mt-auto pt-3">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="module" value="Weed Detection">
+                  <button type="submit" class="btn btn-theme w-100 py-2">
+                    <i class="bi bi-cpu-fill me-2"></i> Train Weed Detection Model
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- HEALTH -->
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-heart-pulse-fill fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">CNN</span>
+              </div>
+
+              <h5 class="fw-bold mb-2">Crop Health Detection</h5>
+              <p class="text-muted mb-3" style="line-height: 1.8;">
+                Trains the crop health classification model to identify healthy and affected crop
+                conditions accurately using disease-aware agricultural image learning.
+              </p>
+
+              <div class="small text-success fw-semibold mb-2">
+                <i class="bi bi-check-circle-fill me-1"></i> CNN-based health classification pipeline
+              </div>
+              <div class="small text-muted mb-3">
+                Dataset Split: 12,902 train / 2,580 test
+              </div>
+
+              <div class="mt-auto pt-3">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="module" value="Crop Health Detection">
+                  <button type="submit" class="btn btn-theme w-100 py-2">
+                    <i class="bi bi-cpu-fill me-2"></i> Train Crop Health Model
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUALITY -->
+          <div class="col-md-6 col-xl-4">
+            <div class="feature-card p-4 h-100 d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div class="rounded-4 p-3 bg-light d-inline-flex">
+                  <i class="bi bi-stars fs-4 text-success"></i>
+                </div>
+                <span class="mini-badge">ANN</span>
+              </div>
+
+              <h5 class="fw-bold mb-2">Crop Quality Assessment</h5>
+              <p class="text-muted mb-3" style="line-height: 1.8;">
+                Trains the crop quality analysis model to evaluate produce quality levels and support
+                smart grading workflow for agricultural quality assessment.
+              </p>
+
+              <div class="small text-success fw-semibold mb-2">
+                <i class="bi bi-check-circle-fill me-1"></i> ANN-based quality prediction pipeline
+              </div>
+              <div class="small text-muted mb-3">
+                Dataset Split: 420 train / 105 test
+              </div>
+
+              <div class="mt-auto pt-3">
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="module" value="Crop Quality Assessment">
+                  <button type="submit" class="btn btn-theme w-100 py-2">
+                    <i class="bi bi-cpu-fill me-2"></i> Train Crop Quality Model
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

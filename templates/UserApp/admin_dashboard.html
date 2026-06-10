@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="mb-4">
+  <div class="glass-card p-4 p-lg-5">
+    <span class="section-badge mb-3"><i class="bi bi-speedometer2"></i> Admin Dashboard</span>
+    <h1 class="fw-bold mb-2" style="font-size:2.5rem;">Model Management Workspace</h1>
+    <p class="text-muted mb-0">Upload dataset, preprocess data, train algorithms, compare metrics, and manage the workflow.</p>
+  </div>
+</section>
+
+<section>
+  <div class="row g-4">
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-database-fill-up"></i></div>
+        <h4 class="fw-bold">Upload Dataset</h4>
+        <p class="mb-3">Upload agriculture dataset files.</p>
+        <a href="/adminapp/upload-dataset/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-funnel-fill"></i></div>
+        <h4 class="fw-bold">Preprocess</h4>
+        <p class="mb-3">Prepare data for model training.</p>
+        <a href="/adminapp/preprocess/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-cpu-fill"></i></div>
+        <h4 class="fw-bold">Train Models</h4>
+        <p class="mb-3">Run SVM, RF, ANN, CNN, YOLO workflows.</p>
+        <a href="/adminapp/train/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+        <h4 class="fw-bold">Compare Models</h4>
+        <p class="mb-3">View accuracy, precision, recall and F1.</p>
+        <a href="/adminapp/compare/" class="btn btn-theme">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a href="/adminapp/logout/" class="btn btn-soft"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
+</section>
+{% endblock %}

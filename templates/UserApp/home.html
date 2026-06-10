@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}AgriVision | Home{% endblock %}
+
+{% block content %}
+
+<div class="hero-card mb-4">
+  <div id="homeCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
+    <div class="carousel-indicators mb-3">
+      <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <div class="carousel-overlay"></div>
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Crop disease detection">
+        <div class="carousel-caption">
+          <span class="section-badge mb-3">
+            <i class="bi bi-activity"></i> Crop Disease Detection
+          </span>
+          <h2>Detect crop disease with <span class="text-warning">clarity</span>.</h2>
+          <p>Upload crop images and get smart predictions with useful suggestions.</p>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <a href="/user/entry/" class="btn btn-theme">
+              <i class="bi bi-person-check-fill"></i> Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="carousel-overlay"></div>
+        <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Weed detection">
+        <div class="carousel-caption">
+          <span class="section-badge mb-3">
+            <i class="bi bi-bug-fill"></i> Weed Detection
+          </span>
+          <h2>Identify weeds before they reduce <span class="text-warning">yield</span>.</h2>
+          <p>Analyze field images and support early weed control actions.</p>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <a href="/user/login/" class="btn btn-theme">
+              <i class="bi bi-box-arrow-in-right"></i> User Login
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="carousel-overlay"></div>
+        <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1600&q=80" class="d-block w-100" alt="Admin workflow">
+        <div class="carousel-caption">
+          <span class="section-badge mb-3">
+            <i class="bi bi-bar-chart-line-fill"></i> Admin Workflow
+          </span>
+          <h2>Train and compare the <span class="text-warning">best model</span>.</h2>
+          <p>Run preprocessing, training and model comparison from one panel.</p>
+          <div class="d-flex flex-wrap gap-3 mt-3">
+            <a href="/adminapp/login/" class="btn btn-theme">
+              <i class="bi bi-shield-lock-fill"></i> Admin Access
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
+<section class="mb-4">
+  <div class="row g-3">
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-activity"></i></div>
+        <h4 class="fw-bold">Disease</h4>
+        <p class="mb-0">Healthy or diseased crop prediction.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-bug-fill"></i></div>
+        <h4 class="fw-bold">Weeds</h4>
+        <p class="mb-0">Weed identification from field images.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-gem"></i></div>
+        <h4 class="fw-bold">Quality</h4>
+        <p class="mb-0">Crop quality assessment with suggestions.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="bi bi-bar-chart-fill"></i></div>
+        <h4 class="fw-bold">Compare</h4>
+        <p class="mb-0">SVM, RF, ANN, CNN and YOLO metrics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mb-2">
+  <div class="glass-card p-4">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-8">
+        <span class="section-badge mb-2">
+          <i class="bi bi-lightning-charge-fill"></i> Choose Your Role
+        </span>
+        <h3 class="fw-bold mb-1">Start with the right dashboard</h3>
+        <p class="text-muted mb-0">Admin for training workflow. User for image prediction modules.</p>
+      </div>
+
+      <div class="col-lg-4 text-lg-end">
+        <div class="d-flex flex-column flex-sm-row flex-lg-row justify-content-lg-end gap-2">
+          <a href="/adminapp/login/" class="btn btn-theme">
+            <i class="bi bi-shield-lock-fill"></i> Admin
+          </a>
+          <a href="/user/entry/" class="btn btn-soft">
+            <i class="bi bi-person-circle"></i> User
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+{% block title %}AgriVision | Crop Quality Assessment{% endblock %}
+
+{% block content %}
+<style>
+  .quality-hero-title{
+    font-size: 2.35rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .quality-subtext{
+    max-width: 780px;
+    line-height: 1.8;
+  }
+
+  .upload-panel{
+    min-height: 100%;
+  }
+
+  .result-card{
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .result-frame{
+    background: linear-gradient(180deg, #f8fbfc 0%, #f5f8fa 100%);
+    border: 1px solid #dfe7ee;
+    border-radius: 22px;
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    overflow: visible;
+  }
+
+  .result-img{
+    width: 100%;
+    max-width: 100%;
+    max-height: 350px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 18px;
+    border: 1px solid #d8e0e7;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+  }
+
+  .metric-card{
+    background: #fff;
+    border: 1px solid rgba(229, 231, 235, .9);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(15,23,42,.05);
+    padding: 1rem 1.1rem;
+    height: 100%;
+  }
+
+  .metric-label{
+    color: #6b7280;
+    font-size: .86rem;
+    margin-bottom: 8px;
+  }
+
+  .metric-value{
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #0f172a;
+    word-break: break-word;
+  }
+
+  .info-card{
+    background: #fff;
+    border: 1px solid rgba(229, 231, 235, .9);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(15,23,42,.05);
+    padding: 1.2rem 1.1rem;
+    height: 100%;
+  }
+
+  .info-title{
+    font-size: 1.02rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #0f172a;
+  }
+
+  .info-text{
+    color: #475569;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .tip-pill{
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #dde5eb;
+    background: #f8fafc;
+    color: #111827;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-size: .93rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .info-box-title{
+    font-size: 1.08rem;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: #0f172a;
+  }
+
+  @media (max-width: 991px){
+    .quality-hero-title{
+      font-size: 2rem;
+    }
+
+    .result-frame{
+      min-height: 300px;
+      padding: 14px;
+    }
+
+    .result-img{
+      max-height: 290px;
+    }
+  }
+
+  @media (max-width: 576px){
+    .quality-hero-title{
+      font-size: 1.75rem;
+    }
+
+    .result-frame{
+      min-height: 260px;
+      border-radius: 18px;
+    }
+
+    .result-img{
+      max-height: 240px;
+      border-radius: 14px;
+    }
+
+    .metric-value{
+      font-size: 1.2rem;
+    }
+  }
+</style>
+
+<section class="py-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-10">
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <span class="section-badge mb-3">
+              <i class="bi bi-clipboard2-pulse"></i> Crop Quality Assessment
+            </span>
+            <h1 class="quality-hero-title mb-2">Crop Quality Assessment</h1>
+            <p class="text-muted mb-0 quality-subtext">
+              Upload a crop image to assess overall crop condition, review the current quality status,
+              understand the health basis of the result, and receive practical improvement guidance.
+            </p>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="d-flex flex-wrap justify-content-lg-end gap-2">
+              <span class="mini-badge"><i class="bi bi-image-fill"></i> Crop Image</span>
+              <span class="mini-badge"><i class="bi bi-patch-check-fill"></i> Quality Status</span>
+              <span class="mini-badge"><i class="bi bi-exclamation-triangle-fill"></i> Risk Level</span>
+              <span class="mini-badge"><i class="bi bi-lightbulb-fill"></i> Recommendations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-4 p-lg-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-4">
+            <div class="upload-panel">
+              <h3 class="fw-bold mb-3">Upload for assessment</h3>
+              <p class="text-muted mb-0" style="line-height: 1.8;">
+                Upload a clear crop image. The system will assess the crop condition, provide a quality status,
+                indicate the possible risk level, and suggest suitable improvement actions.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="upload-box text-center mb-4">
+                <i class="bi bi-cloud-arrow-up-fill fs-1 text-success"></i>
+                <h5 class="mt-3 fw-bold">Choose Crop Image</h5>
+                <p class="text-muted mb-3">
+                  Use a clear crop or leaf image where the visible condition can be assessed properly.
+                </p>
+                <input type="file" name="image" class="form-control" accept="image/*" required>
+              </div>
+
+              <button type="submit" class="btn btn-theme px-4">
+                <i class="bi bi-search"></i> Assess Crop Quality
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% if result %}
+      <div class="glass-card p-4 p-lg-5 mb-4">
+
+        <div class="row g-4 align-items-stretch mb-4">
+          <div class="col-lg-6">
+            <div class="feature-card result-card p-3 h-100">
+              <h4 class="fw-bold mb-3">Uploaded Crop Image</h4>
+              <div class="result-frame">
+                <img
+                  src="{{ uploaded_image_url }}"
+                  alt="Uploaded crop image"
+                  class="result-img"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="feature-card p-3 h-100">
+              <h4 class="fw-bold mb-3">Assessment Overview</h4>
+
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="metric-card">
+                    <div class="metric-label">Quality Status</div>
+                    <div class="metric-value">{{ status }}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="metric-card">
+                    <div class="metric-label">Health Basis</div>
+                    <div class="metric-value">{{ health_label }}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="metric-card">
+                    <div class="metric-label">Risk Level</div>
+                    <div class="metric-value">{{ risk }}</div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="metric-card">
+                    <div class="metric-label">Prediction Confidence</div>
+                    <div class="metric-value">{{ confidence }}</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="info-card h-100">
+              <div class="info-title">
+                <i class="bi bi-card-text me-2"></i>Condition Summary
+              </div>
+              <p class="info-text">{{ summary }}</p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-card h-100">
+              <div class="info-title">
+                <i class="bi bi-search-heart me-2"></i>Assessment Basis
+              </div>
+              <p class="info-text">{{ basis }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card p-4 mb-4">
+          <div class="info-box-title">
+            <i class="bi bi-flower1 me-2"></i>Recommendations
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            {% for item in suggestions %}
+              <span class="tip-pill">{{ item }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="feature-card p-4">
+          <div class="info-box-title">
+            <i class="bi bi-tree-fill me-2"></i>Improvement Guidance
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            {% for item in improvement_tips %}
+              <span class="tip-pill">{{ item }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+{% endblock %}
